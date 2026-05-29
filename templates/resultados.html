@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados del analisis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <main class="shell">
+        <section class="panel">
+            <header class="page-header results-header">
+                <div>
+                    <p class="eyebrow">Resultado</p>
+                    <h1>Analisis de la expresion</h1>
+                </div>
+                <a class="secondary-link" href="{{ url_for('index') }}">Nueva expresion</a>
+            </header>
+
+            <p class="expression-line">
+                <strong>Entrada:</strong>
+                <code>{{ expression if expression else "(vacia)" }}</code>
+            </p>
+
+            {% if valid %}
+                <p class="status success">La cadena es valida segun la gramatica.</p>
+
+                <section class="result-section">
+                    <h2>Tabla de lexemas y tokens</h2>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Lexema</th>
+                                    <th>Token</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in token_table %}
+                                    <tr>
+                                        <td><code>{{ item.lexeme }}</code></td>
+                                        <td><code>{{ item.token }}</code></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="result-grid">
+                    <div class="result-section">
+                        <h2>Arbol de derivacion</h2>
+                        <pre>{{ tree }}</pre>
+                    </div>
+                    <div class="result-section">
+                        <h2>Cadena final</h2>
+                        <pre>{{ final_string }}</pre>
+                    </div>
+                </section>
+
+                <section class="derivation-grid">
+                    <div class="result-section">
+                        <h2>Derivacion por izquierda</h2>
+                        <ol class="derivation-list">
+                            {% for step in left_derivation %}
+                                <li><code>{{ step }}</code></li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+
+                    <div class="result-section">
+                        <h2>Derivacion por derecha</h2>
+                        <ol class="derivation-list">
+                            {% for step in right_derivation %}
+                                <li><code>{{ step }}</code></li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </section>
+            {% else %}
+                <p class="status error">La cadena no es valida.</p>
+                <p class="error-detail"><strong>Error:</strong> {{ error }}</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
+

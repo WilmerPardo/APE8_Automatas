@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizador CFG Booleano</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <main class="shell">
+        <section class="panel">
+            <header class="page-header">
+                <p class="eyebrow">Gramaticas libres de contexto</p>
+                <h1>Analizador de expresiones booleanas</h1>
+            </header>
+
+            <form class="analysis-form" action="{{ url_for('analizar') }}" method="POST">
+                <label for="expression">Expresion</label>
+                <div class="input-row">
+                    <input
+                        type="text"
+                        id="expression"
+                        name="expression"
+                        placeholder="A | B & ~C"
+                        autocomplete="off"
+                        required
+                    >
+                    <button type="submit">Analizar</button>
+                </div>
+            </form>
+
+            <div class="examples" aria-label="Ejemplos validos">
+                <span>Ejemplos:</span>
+                <code>A | B & ~C</code>
+                <code>id | ~ ( id & id )</code>
+                <code>(A | B) & C</code>
+            </div>
+
+            <section class="grammar-section">
+                <div>
+                    <h2>Gramatica teorica</h2>
+                    <ul class="grammar-list">
+                        {% for production in productions %}
+                            <li><code>{{ production }}</code></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div>
+                    <h2>Precedencia</h2>
+                    <ol class="precedence-list">
+                        <li><code>~</code> mayor precedencia</li>
+                        <li><code>&</code> precedencia intermedia</li>
+                        <li><code>|</code> menor precedencia</li>
+                    </ol>
+                </div>
+            </section>
+        </section>
+    </main>
+</body>
+</html>
+
