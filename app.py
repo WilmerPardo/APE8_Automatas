@@ -44,6 +44,7 @@ def analizar():
             valid=False,
             token_table=[],
             tree=None,
+            tree_root=None,
             left_derivation=[],
             right_derivation=[],
             final_string="",
@@ -81,6 +82,7 @@ def analyze_expression(expression: str) -> dict[str, object]:
         "valid": True,
         "token_table": token_table,
         "tree": tree_to_ascii(tree),
+        "tree_root": tree,
         "left_derivation": derivations["left_derivation"],
         "right_derivation": derivations["right_derivation"],
         "final_string": derivations["final_string"],
@@ -91,4 +93,3 @@ def analyze_expression(expression: str) -> dict[str, object]:
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "5000"))
     app.run(debug=True, port=port)
-
