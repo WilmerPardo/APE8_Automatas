@@ -1,4 +1,4 @@
-"""Analizador lexico para expresiones logicas booleanas."""
+"""Convierte la entrada del usuario en una secuencia de tokens"""
 
 from __future__ import annotations
 
@@ -41,13 +41,10 @@ TOKEN_REGEX = re.compile(
 def tokenize(text: str) -> list[Token]:
     """
     Convierte una cadena de entrada en una lista de tokens.
-
     Args:
         text: Expresion logica ingresada por el usuario.
-
     Returns:
         Lista de tokens validos mas un token EOF al final.
-
     Raises:
         SyntaxError: Si aparece un simbolo que no pertenece al lenguaje.
     """

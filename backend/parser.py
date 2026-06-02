@@ -1,4 +1,4 @@
-"""Parser descendente recursivo para la gramatica booleana."""
+"""Verifica si la cadena cumple con la gramatica"""
 
 from __future__ import annotations
 
@@ -56,13 +56,10 @@ class Parser:
     def consume(self, expected_type: str) -> Token:
         """
         Consume el token actual si coincide con el tipo esperado.
-
         Args:
             expected_type: Tipo de token que se espera encontrar.
-
         Returns:
             Token consumido.
-
         Raises:
             SyntaxError: Si el token actual no coincide con el esperado.
         """
@@ -82,10 +79,8 @@ class Parser:
     def parse(self) -> Node:
         """
         Inicia el analisis sintactico desde el simbolo inicial S.
-
         Returns:
             Nodo raiz del arbol de derivacion.
-
         Raises:
             SyntaxError: Si sobran tokens luego de analizar la expresion.
         """
@@ -130,7 +125,6 @@ class Parser:
     def parse_term(self) -> Node:
         """
         Analiza terminos con AND.
-
         Equivale a:
             T -> F T'
             T' -> & F T' | epsilon
@@ -155,7 +149,6 @@ class Parser:
     def parse_factor(self) -> Node:
         """
         Analiza factores.
-
         Equivale a:
             F -> ~F
             F -> (E)
